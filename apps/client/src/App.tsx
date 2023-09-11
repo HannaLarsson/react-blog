@@ -1,31 +1,25 @@
-import { emojiValidator, type Emoji } from 'api';
-import { useCallback, useState } from 'react';
-import { EmojiDisplay } from './components/emoji-display';
-
-const fetchRandomEmoji = async () => {
-  const response = await (await fetch('/api/emoji')).json();
-  return emojiValidator.parse(response);
-};
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Create } from './pages/Create';
+import BlogDetails from './pages/BlogDetails';
+import { Home } from './pages/Home';
+import About from './pages/About';
+import { Navbar } from './components/Navbar';
 
 export const App = () => {
-  const [emoji, setEmoji] = useState<Emoji>();
-
-  const handleOnClick = useCallback(async () => {
-    try {
-      const emoji = await fetchRandomEmoji();
-      setEmoji(emoji);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
 
   return (
-    <>
-      <div className='emoji'>
-        <EmojiDisplay emoji={emoji} />
-        <button onClick={handleOnClick}>fetch random emoji</button>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/"  element={<Home/>} />
+            <Route path="/about"  element={<About/>} />
+            <Route path="/create"  element={<Create/>} />
+            <Route path="/blogs/:id"  element={<BlogDetails/>} />
+          </Routes>
+        </div>
       </div>
-      <h1>Express + React + Typescript</h1>
-    </>
+  </Router>
   );
 };
