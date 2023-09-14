@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BlogListProps } from "../types";
+import { BlogListProps } from "./BlogList.types";
 
 export const BlogList = ({ blogs, title }: BlogListProps) => {
 

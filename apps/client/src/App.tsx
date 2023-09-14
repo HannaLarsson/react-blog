@@ -3,7 +3,7 @@ import { Create } from './pages/Create';
 import BlogDetails from './pages/BlogDetails';
 import { Home } from './pages/Home';
 import About from './pages/About';
-import { Navbar } from './components/Navbar';
+import { Navbar } from './components/Navbar/Navbar';
 
 export const App = () => {
 

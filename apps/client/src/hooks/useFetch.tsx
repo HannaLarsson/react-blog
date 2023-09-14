@@ -6,15 +6,17 @@ const useFetch = <T,>(url: string) => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const abortCont = new AbortController();
+    const abortCtrl = new AbortController();
 
     setTimeout(() => {
-      fetch(url, { signal: abortCont.signal }).then(res => {
+      fetch(url, { signal: abortCtrl.signal }).then(res => {
+        console.log('i fetch', url, res);
         if(!res.ok) {
           throw Error('Could not fetch data');
         }
         return res.json();
       }).then(data => {
+        console.log('i then');
         setData(data);
         setIsPending(false);
         setError('');
@@ -25,11 +27,12 @@ const useFetch = <T,>(url: string) => {
         } else {
           setIsPending(false);
           setError(err.message);
+          console.log('hejhej error:', err.message);
         }
       })
     }, 1000);
 
-    return () => abortCont.abort();
+    return () => abortCtrl.abort();
   }, [url]);
 
   return { data, isPending, error } as T;
