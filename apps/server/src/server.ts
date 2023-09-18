@@ -1,10 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
-import { v4 as uuidv4 } from 'uuid';
 import data from '../src/data/db.json';
 import { Blog } from '../../../types';
-
-import { EMOJI_KIND, type Emoji } from 'api';
 
 const apiRouter = () => {
   const router = express.Router();
@@ -12,13 +9,9 @@ const apiRouter = () => {
     res.json('Hello, world!');
   });
 
-  router.get('/emoji', (_req, res) => {
-    const emojiObject: Emoji = {
-      id: uuidv4(),
-      kind: EMOJI_KIND[Math.floor(Math.random() * EMOJI_KIND.length)],
-      timestamp: new Date().toISOString(),
-    };
-    res.json(emojiObject);
+  router.get('/cool', (_req, res) => {
+    const coolString = 'veryCool'; // + _req.params.id;
+    res.json(coolString);
   });
 
   router.get('/blogs', (_req, res) => {
@@ -33,6 +26,7 @@ const apiRouter = () => {
   });
 
   router.get('/blogs/:id', (req, res) => {
+    console.log('i blogs id', req, res);
     try {
       const blog: Blog | undefined = data.blogs.find(blog => blog.id === +req.params.id);
       if (!blog) {
@@ -40,7 +34,7 @@ const apiRouter = () => {
         return;
       }
 
-      console.log('foo');
+      console.log('foo', req);
 
       const blogObject = {
         title: blog.title,

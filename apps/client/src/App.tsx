@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { Create } from './pages/Create';
 import BlogDetails from './pages/BlogDetails';
 import { Home } from './pages/Home';
@@ -8,7 +8,7 @@ import { Navbar } from './components/Navbar/Navbar';
 export const App = () => {
 
   return (
-    <Router>
+    <BrowserRouter>
       <div className="App">
         <Navbar />
         <div className="content">
@@ -20,6 +20,6 @@ export const App = () => {
           </Routes>
         </div>
       </div>
-  </Router>
+  </BrowserRouter>
   );
 };

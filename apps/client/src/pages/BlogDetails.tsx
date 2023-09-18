@@ -4,7 +4,7 @@ import { BlogApiResponse } from "../types";
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const { data, error, isPending } = useFetch<BlogApiResponse>('api/blogs1');
+  const { data, error, isPending } = useFetch<BlogApiResponse>('api/blogs/' + id);
 
   return ( 
     <div className="blog-details">
